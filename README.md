@@ -11,7 +11,10 @@ Bu projede, her bir uygulama farklı paralellism teknikleri kullanılarak filtre
 ## filter1 Uygulaması
 Ubuntu\'da bir terminal açıp <i>filter1.cpp</i> uygulamasını çalıştırmak için ilk adım olarak
 
-g++ filter1.cpp
+```
+  g++ filter1.cpp
+```
+
 
 yazıyoruz. sonra;
 
