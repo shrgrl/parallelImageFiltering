@@ -9,12 +9,11 @@ Paralel Programlama basit şekliyle, bir problemin çözümünde birden çok hes
 Bu projede, her bir uygulama farklı paralellism teknikleri kullanılarak filtreleme işlemleri yapmaktadır. Uygulamaları çalıştırmak için Ubuntu işletim sistemi edinmeniz gerekmekte. Bilgisayarınıza kurmak istemiyorsanız <strong>VirtualMachine</strong> sanal ortamına kurarak çalıştırabilirsiniz.
 
 ## filter1 Uygulaması
-Ubuntu\'da bir terminal açıp <i>filter1.cpp</i> uygulamasını çalıştırmak için ilk adım olarak
+Ubuntu\'da bir terminal açıp projenin bulunduğu dizine gidiyoruz. <i>filter1.cpp</i> uygulamasını çalıştırmak için ilk adım olarak
 
 ```
   g++ filter1.cpp
 ```
-
 
 yazıyoruz. sonra;
 
@@ -53,6 +52,36 @@ Paket yüklemelerini bitirdikten sonra projemizin son adımı tamamlayabiliriz.
 
 
 ## filter2 Uygulaması
+Bu uygulamada farklı bir teknik olarak <strong><i>MPI</i></strong> kütüphanesi kullanıldı. MPI, paralel programlama amacıyla kullanılan bir platformdur. MPI temel olarak birden fazla bilgisayarın üzerinde aynı programın çalıştırılması ve bu çalıştırma sırasında programların birbiri ile iletişime geçerek birbirinden veri transfer etmesine dayanır. MPI ile işimizi bilgisayarlara dağıtabildiğimiz gibi bir bilgisayar üzerinde de birden fazla iş (process) çalıştırmamız mümkündür. Dolayısyla örneğin 10 bilgisayarın bulunduğu bir ortamda her bilgisayarda 3’er iş çalıştırılırsa bu durumda toplam 30 iş çalışmış olur. Yani programımız sanki 30 farklı bilgisayarda çalışıyormuş gibi davranmak zorundadır. MPI kullanımı hakkında detaylı bilgiyi [bu linkten](http://bilgisayarkavramlari.sadievrenseker.com/2009/04/29/mpi-message-passing-interface-mesaj-gecirme-arayuzu/) edinebilirsiniz.<br>Ubuntu\'da bir terminal açıp projenin bulunduğu dizine gidiyoruz. <i>filter1.cpp</i> uygulamasını çalıştırmak için ilk adım olarak gerekli <i>mpi</i> kütüphanesini indirmemiz gerekiyor. Sırayla aşağıdaki işlemleri yapabilirsiniz:
+
+```
+  sudo apt install libmpich-dev
+  sudo apt install libopenmpi-dev
+```
+
+İndirme işlemlerini tamamladıktan sonra projemizi çalıştırabiliriz. İlk olarak;
+
+```
+  mpicxx filter1.cpp
+```
+
+ile bir a.out dosyası oluşturduk. Daha sonra;
+
+```
+  mpi run -np 4 ./a.out
+```
+Programın kaç kere çalışmasını istiyorsanız 4 yerine herhangi bir çift sayı yazabilirsiniz. Bu işlemin ardından filtrelenmiş görüntünün matrisini elde edeceğiz. Daha sonra;
+
+```
+  ./Proje1Script.sh GoruntuMatrisi1_filtered.txt
+```
+
+komutunu yazarak filtrelenmiş görüntüyü elde ediyoruz. Sonuçlar aşağıdaki gibi olacaktır.
+
+![Orjinal Görüntü](https://github.com/shrgrl/parallelImageFiltering/blob/master/img1.jpg)
+![Filtrelenmiş Görüntü](https://github.com/shrgrl/parallelImageFiltering/blob/master/img2.jpg)
+
+
 
 
 ## filter3 Uygulaması
